@@ -9,6 +9,10 @@ import { BookComponent } from './book/book.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
+import { AuthorComponent } from './author/author.component';
+import { AddAuthorComponent } from './add-author/add-author.component';
+import { AuthorDetailsComponent } from './author-details/author-details.component';
+import { EditAuthorComponent } from './edit-author/edit-author.component';
 
 const appRoutes: Routes = [
   {
@@ -35,7 +39,27 @@ const appRoutes: Routes = [
     path: 'edit/:id',
     component: EditBookComponent,
     data: { title: 'Edit Book' }
-  }
+  },
+  {
+    path: 'authors',
+    component: AuthorComponent,
+    data: { title: 'Author List' }
+  },
+  {
+    path: 'author/create',
+    component: AddAuthorComponent,
+    data: { title: 'Add Author' }
+  },
+  {
+    path: 'author/details/:id',
+    component: AuthorDetailsComponent,
+    data: { title: 'Author Details' }
+  },
+  {
+    path: 'author/edit/:id',
+    component: EditAuthorComponent,
+    data: { title: 'Edit Author' }
+  },
 ];
 
 @NgModule({
@@ -45,6 +69,10 @@ const appRoutes: Routes = [
     BookDetailsComponent,
     AddBookComponent,
     EditBookComponent,
+    AuthorComponent,
+    AddAuthorComponent,
+    AuthorDetailsComponent,
+    EditAuthorComponent
   ],
   imports: [
     BrowserModule,

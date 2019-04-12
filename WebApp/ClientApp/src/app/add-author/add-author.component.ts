@@ -4,32 +4,23 @@ import { HttpClient } from '@angular/common/http'
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'app-add-book',
-  templateUrl: './add-book.component.html',
-  styleUrls: ['./add-book.component.css'],
+  selector: 'app-add-author',
+  templateUrl: './add-author.component.html',
+  styleUrls: ['./add-author.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class AddBookComponent implements OnInit {
-  book: any = {};
-  authors: any = [];
-
+export class AddAuthorComponent implements OnInit {
+  author: any = {};
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    this.getAuthors();
   }
 
-  getAuthors() {
-    this.http.get(`${environment.baseUrl}/api/authors`).subscribe(data => {
-      this.authors = data;
-    });
-  }
-
-  createBook() {
-    this.http.post(`${environment.baseUrl}/api/books`, this.book)
+  createAuthor() {
+    this.http.post(`${environment.baseUrl}/api/authors`, this.author)
       .subscribe(res => {
         let id = res['Id'];
-        this.router.navigate(['/details', id]);
+        this.router.navigate(['/author/details', id]);
       }, (err) => {
         console.log(err);
       }

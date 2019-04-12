@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-edit-book',
@@ -9,20 +10,30 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.None
 })
 export class EditBookComponent implements OnInit {
-  book : any = {};
+  book: any = {};
+  authors: any = [];
+
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getBookDetail(this.route.snapshot.params['id']);
+    this.getAuthors();
+  }
+
+  getAuthors() {
+    this.http.get(`${environment.baseUrl}/api/authors`).subscribe(data => {
+      this.authors = data;
+    });
   }
 
   getBookDetail(id) {
-    this.http.get('/api/books/' + id).subscribe(data => {
+    this.http.get(`${environment.baseUrl}/api/books/${id}`).subscribe(data => {
       this.book = data;
     });
   }
   updateBook(id) {
-    this.http.put('/api/books/' + id, this.book)
+    console.log(this.book);
+    this.http.put(`${environment.baseUrl}/api/books/${id}`, this.book)
       .subscribe(res => {
         let id = res['Id'];
         this.router.navigate(['/details', id]);
@@ -32,7 +43,7 @@ export class EditBookComponent implements OnInit {
       );
   }
   deleteBook(id) {
-    this.http.delete('/api/books/' + id)
+    this.http.delete(`${environment.baseUrl}/api/books/${id}`)
       .subscribe(res => {
         this.router.navigate(['/books']);
       }, (err) => {

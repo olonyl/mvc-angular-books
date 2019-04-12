@@ -1,0 +1,27 @@
+<div class="container">
+    <h1>
+        Author List
+    </h1>
+    <hr />
+    <a href="/author/create">Create Author</a>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let author of authors">
+                <td>{{ author.FirstName }}</td>
+                <td>{{ author.LastName }}</td>
+                <td><a href="/author/details/{{author.Id}}">Details</a></td>
+                <td><a href="/author/edit/{{author.Id}}">Edit</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

@@ -12,13 +12,13 @@ namespace WebApp.App_Start
         {
             bundles.Add(new ScriptBundle("~/Script/Bundles")
                 .Include(
-                    "~/bundles/inline.*",
-                    "~/bundles/polyfills.*",
-                    "~/bundles/scripts.*",
-                    "~/bundles/vendor.*",
-                    "~/bundles/main.*"));
+                    "~/ClientApp/node_modules/inline.*",
+                    "~/ClientApp/src/app/polyfills.*",
+                    "~/ClientApp/node_modules/scripts.*",
+                    "~/ClientApp/node_modules/vendor.*",
+                    "~/ClientApp/src/app/main.*"));
             bundles.Add(new StyleBundle("~/Content/Styles")
-                .Include("~/bundles/styles.*"));
+                .Include("~/ClientApp/node_modules/styles.*"));
         }
     }
 }

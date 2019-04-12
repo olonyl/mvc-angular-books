@@ -26,5 +26,7 @@ namespace WebApp.Models
         {
             base.OnModelCreating(modelBuilder);
         }
+
+        public System.Data.Entity.DbSet<WebApp.Models.Author> Authors { get; set; }
     }
 }

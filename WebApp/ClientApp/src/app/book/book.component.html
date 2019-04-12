@@ -16,7 +16,7 @@
     <tbody>
       <tr *ngFor="let book of books">
         <td>{{ book.Title }}</td>
-        <td>{{ book.Author }}</td>
+        <td>{{ book.Author.FirstName }} {{ book.Author.LastName }}</td>
         <td><a href="/details/{{book.Id}}">Details</a></td>
         <td><a href="/edit/{{book.Id}}">Edit</a></td>
       </tr>

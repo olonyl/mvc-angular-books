@@ -12,44 +12,44 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    public class BooksController : ApiController
+    public class AuthorsController : ApiController
     {
         private WebAppContext db = new WebAppContext();
 
-        // GET: api/Books
-        public IQueryable<Book> GetBooks()
+        // GET: api/Authors
+        public IQueryable<Author> GetAuthors()
         {
-            return db.Books.Include(x=> x.Author);
+            return db.Authors;
         }
 
-        // GET: api/Books/5
-        [ResponseType(typeof(Book))]
-        public IHttpActionResult GetBook(int id)
+        // GET: api/Authors/5
+        [ResponseType(typeof(Author))]
+        public IHttpActionResult GetAuthor(int id)
         {
-            Book book = db.Books.Find(id);
-            if (book == null)
+            Author author = db.Authors.Find(id);
+            if (author == null)
             {
                 return NotFound();
             }
-        
-            return Ok(book);
+
+            return Ok(author);
         }
 
-        // PUT: api/Books/5
+        // PUT: api/Authors/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBook(int id, Book book)
+        public IHttpActionResult PutAuthor(int id, Author author)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != book.Id)
+            if (id != author.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(book).State = EntityState.Modified;
+            db.Entry(author).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace WebApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BookExists(id))
+                if (!AuthorExists(id))
                 {
                     return NotFound();
                 }
@@ -67,38 +67,38 @@ namespace WebApp.Controllers
                 }
             }
 
-            return Ok(book);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Books
-        [ResponseType(typeof(Book))]
-        public IHttpActionResult PostBook(Book book)
+        // POST: api/Authors
+        [ResponseType(typeof(Author))]
+        public IHttpActionResult PostAuthor(Author author)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Books.Add(book);
+            db.Authors.Add(author);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = book.Id }, book);
+            return CreatedAtRoute("DefaultApi", new { id = author.Id }, author);
         }
 
-        // DELETE: api/Books/5
-        [ResponseType(typeof(Book))]
-        public IHttpActionResult DeleteBook(int id)
+        // DELETE: api/Authors/5
+        [ResponseType(typeof(Author))]
+        public IHttpActionResult DeleteAuthor(int id)
         {
-            Book book = db.Books.Find(id);
-            if (book == null)
+            Author author = db.Authors.Find(id);
+            if (author == null)
             {
                 return NotFound();
             }
 
-            db.Books.Remove(book);
+            db.Authors.Remove(author);
             db.SaveChanges();
 
-            return Ok(book);
+            return Ok(author);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace WebApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool BookExists(int id)
+        private bool AuthorExists(int id)
         {
-            return db.Books.Count(e => e.Id == id) > 0;
+            return db.Authors.Count(e => e.Id == id) > 0;
         }
     }
 }
